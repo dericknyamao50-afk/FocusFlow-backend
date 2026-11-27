@@ -12,10 +12,7 @@ try:
 except ImportError:
     JWTManager = None
 
-try:
-    from app.routers.github import github_bp
-except ImportError:
-    github_bp = None
+from app.routers.github import github_bp
 
 try:
     from app.routers.tasks import tasks_bp
@@ -96,8 +93,7 @@ def create_app() -> Flask:
 
     app.register_blueprint(auth_bp, url_prefix="/api")
 
-    if github_bp is not None:
-        app.register_blueprint(github_bp, url_prefix="/api/github")
+    app.register_blueprint(github_bp, url_prefix="/api/github")
     if tasks_bp is not None:
         app.register_blueprint(tasks_bp, url_prefix="/api/tasks")
     if projects_bp is not None:
